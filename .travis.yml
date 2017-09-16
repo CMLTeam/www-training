@@ -35,6 +35,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - cd _site ; scp -i /tmp/deploy_rsa -C -r '_site/*' apps1@prod.cmlteam.com:~/www-training
+  - cd _site ; scp -i /tmp/deploy_rsa -C -r * apps1@prod.cmlteam.com:~/www-training
 
 
