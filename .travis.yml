@@ -8,7 +8,6 @@ cache: bundler # speed up
 # the `install` step will run `bundle install` by default.
 script:
 - bundle exec jekyll build
-- rm ./_site/*.iml
 
 # branch whitelist, only for GitHub Pages
 branches:
