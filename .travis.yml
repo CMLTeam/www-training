@@ -9,6 +9,9 @@ cache: bundler # speed up
 script:
 - bundle exec jekyll build
 
+addons:
+  ssh_known_hosts: prod.cmlteam.com
+
 # branch whitelist, only for GitHub Pages
 branches:
   only:
