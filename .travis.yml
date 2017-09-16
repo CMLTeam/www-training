@@ -7,7 +7,7 @@ cache: bundler # speed up
 # Assume bundler is being used, therefore
 # the `install` step will run `bundle install` by default.
 script:
-- bundle exec jekyll build ; mv _site site
+- bundle exec jekyll build
 
 addons:
   ssh_known_hosts: prod.cmlteam.com
@@ -35,6 +35,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - cd site ; scp -i /tmp/deploy_rsa -C -r site/* apps1@prod.cmlteam.com:~/www-training
+  - cd _site ; bash -c "scp -i /tmp/deploy_rsa -C -r _site/* apps1@prod.cmlteam.com:~/www-training"
 
 
