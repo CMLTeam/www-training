@@ -8,11 +8,12 @@ cache: bundler # speed up
 # the `install` step will run `bundle install` by default.
 script:
 - bundle exec jekyll build
+- rm _site/*.iml
 
 # branch whitelist, only for GitHub Pages
 branches:
   only:
-   - master
+  - master
 #  - gh-pages     # test the gh-pages branch
 #  - /pages-(.*)/ # test every branch which starts with "pages-"
 
@@ -21,4 +22,17 @@ branches:
 #  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 
 sudo: false # route your build to the container-based infrastructure for a faster build
+
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_084ba45aab19_key -iv $encrypted_084ba45aab19_iv
+  -in deploy_rsa.enc
+  -out /tmp/deploy_rsa -d
+- chmod 600 /tmp/deploy_rsa
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+  - cd _site ; scp -i /tmp/deploy_rsa -C -r _site/* apps1@prod.cmlteam.com:~/www-training
+
 
